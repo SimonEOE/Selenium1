@@ -1,0 +1,38 @@
+package seleniumDemo1;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension; 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+
+public class Demo {
+
+	public static void main(String[] args) {
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");//设置Driver
+		WebDriver driver = new ChromeDriver();
+		
+		driver.manage().window().setSize(new Dimension(1400, 800));//设置窗口大小
+		driver.get("https://www.163.com");
+		
+		WebElement Emale = driver.findElement(By.linkText("音乐"));
+		Emale.click();
+		Set<String> winHandels = driver.getWindowHandles(); // 得到当前窗口的set集合
+	    List<String> it = new ArrayList<String>(winHandels); // 将set集合存入list对象
+	    driver.switchTo().window(it.get(1)); // 切换到弹出的新窗口
+	    try {
+	    	Thread.sleep(2000);
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    }
+	   String url=driver.getCurrentUrl(); //获取新窗口的url
+	   System.out.println(url); //输出到控制台
+	   driver.switchTo().window(it.get(0)); // 返回至原页面
+		
+	}
+
+}
