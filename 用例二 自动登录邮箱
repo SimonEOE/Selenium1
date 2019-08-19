@@ -1,0 +1,33 @@
+package seleniumDemo3;
+
+import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
+import java.util.concurrent.TimeUnit;
+
+
+public class email {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+      System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
+      WebDriver driver = new ChromeDriver();
+      driver.manage().window().maximize();
+      driver.manage().deleteAllCookies();
+      driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+      String str = "https://mail.163.com/";
+      driver.get(str);//打开163邮箱网页
+      WebElement q1 = driver.findElement(By.id("switchAccountLogin"));//定位到账号密码登陆选项
+      q1.click();//选择账号密码登陆
+      driver.switchTo().frame(driver.findElement(By.cssSelector("iframe")));//切换到登陆内嵌面板
+      q1 = driver.findElement(By.cssSelector("input.j-inputtext.dlemail.j-nameforslide"));//定位到输入账号栏
+      q1.sendKeys("yelangwu");//输入账号
+      WebElement q2 = driver.findElement(By.cssSelector("input.j-inputtext.dlpwd"));//定位到输入密码栏
+      q2.sendKeys("************");//输入密码
+      WebElement q3 = driver.findElement(By.cssSelector("a#dologin.u-loginbtn.btncolor.tabfocus"));//定位到登陆按钮
+      q3.click();//登陆邮箱
+      
+	}
+
+}
